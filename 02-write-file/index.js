@@ -14,7 +14,7 @@ const rdln = readline.createInterface(
     output: process.stdout,
   });
 
-stdout.write(`> Пожалуйста, укажите текст для сохранения в файл\n> Ctrl+C для выхода\n`);
+stdout.write(`> Пожалуйста, укажите текст для сохранения в файл\n> Ctrl+C для выхода или введите exit\n`);
 rdln.on('SIGINT', () => {
   console.log('> Работа завершена');
   rdln.close()
@@ -25,6 +25,7 @@ rdln.on('line', (input) => {
 })
 emitter.on('closeApp', (exit) => {
   if (exit.toLowerCase() === 'exit') {
+    console.log('> Работа завершена');
     process.exit();
   }
 })
