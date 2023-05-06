@@ -1,4 +1,5 @@
 const fsPromise = require('fs/promises');
+const fs = require('fs');
 const path = require('path');
 
 const sourcePath = path.join(__dirname, 'files');
@@ -20,4 +21,11 @@ async function copyFile(from, to) {
   })
   return res;
 }
-copyDir(sourcePath).catch(console.error);
+async function deleteAndRecreateDirectory(name) {
+  await fsPromise.rm(name, { recursive: true, force: true });
+  await copyDir(sourcePath).catch(console.error);
+}
+
+deleteAndRecreateDirectory(path.join(__dirname, 'files-copy'),sourcePath)
+
+
